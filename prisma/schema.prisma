@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model tweets {
+  id          Int      @id @default(autoincrement())
+  displayName String   @db.VarChar(100)
+  username    String   @db.VarChar(20)
+  verified    Boolean
+  text        String
+  image       String
+  avatar      String
+  likes       Int[]
+  coments     String[]
+}
+
+model cuenta {
+  id          Int      @id @default(autoincrement())
+  displayName String   @unique @db.VarChar(100)
+  username    String   @unique
+  avatar      String
+  verified    Boolean
+  password    String
+  correo      String
+  tweets      Int[]
+  followers   String[]
+  fallowed    String[]
+}
